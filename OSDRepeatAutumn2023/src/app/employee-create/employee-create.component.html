@@ -1,0 +1,24 @@
+<h1 class="text-center mt-4">Create Employee</h1>
+<div class="container">
+  <form (submit)="createEmployee()" class="needs-validation">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name:</label>
+      <input type="text" id="firstName" [(ngModel)]="employeeData.firstName" name="firstName" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name:</label>
+      <input type="text" id="lastName" [(ngModel)]="employeeData.lastName" name="lastName" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" id="email" [(ngModel)]="employeeData.email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="hours" class="form-label">Hours:</label>
+      <input type="number" id="hours" [(ngModel)]="employeeData.hours" name="hours" class="form-control" required>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </form>
+</div>

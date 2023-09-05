@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aws-amplify": "^3.4.3",
+    "aws-amplify-angular": "^6.0.60"
+  }
+}
