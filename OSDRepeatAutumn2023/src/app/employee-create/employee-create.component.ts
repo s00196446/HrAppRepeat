@@ -19,11 +19,11 @@ export class EmployeeCreateComponent {
   createEmployee() {
     this.employeeService.createEmployee(this.employeeData).subscribe(
       (response) => {
-        // Handle success, e.g., show a success message
+        // Handle success
         console.log('Employee created:', response);
       },
       (error) => {
-        // Handle error, e.g., show an error message
+        // Handle error
         console.error('Error creating employee:', error);
       }
     );
