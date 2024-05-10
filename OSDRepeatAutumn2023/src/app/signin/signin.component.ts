@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Auth, GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/auth';
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+
 
 @Component({
   selector: 'app-signin',
@@ -7,26 +8,17 @@ import { Auth, GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'fir
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
-  private auth : Auth
+  constructor(private authService: SocialAuthService) {}
 
-  constructor() {
-    this.auth = getAuth();
-   }
-
-  async signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    try{
-      await signInWithPopup(this.auth, provider);
-    }catch (error) {
-      console.error('Error signing in with Google:', error);
-    }
-  }
-
-  async signOut() {
-    try {
-      await signOut(this.auth);
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user: SocialUser) => {
+        // Handle sign-in success
+        console.log('User successfully signed in:', user);
+      })
+      .catch((error) => {
+        // Handle sign-in error
+        console.error('Error signing in with Google:', error);
+      });
   }
 }

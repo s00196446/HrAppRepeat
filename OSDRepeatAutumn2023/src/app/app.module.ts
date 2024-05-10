@@ -14,6 +14,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { RegistrationComponent } from './registration/registration.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { provideConfig } from '../social-auth-config.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,15 @@ import { RegistrationComponent } from './registration/registration.component';
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
