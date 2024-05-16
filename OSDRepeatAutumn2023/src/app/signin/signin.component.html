@@ -1,11 +1,10 @@
-<div class="container-fluid h-100">
-    <div class="row h-100 justify-content-center align-items-center">
-      <div class="col-md-6">
-        <div class="button-box text-center">
-          <button (click)="signInWithGoogle()" class="btn btn-primary btn-lg">Sign In with Google</button>
-          <button (click)="signOut()" class="btn btn-danger btn-lg">Sign Out</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+<!-- login.component.html -->
+<form (submit)="login()">
+  <label for="username">Username:</label>
+  <input type="text" id="username" [(ngModel)]="username" name="username" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" [(ngModel)]="password" name="password" required>
+
+  <button type="submit">Login</button>
+</form>

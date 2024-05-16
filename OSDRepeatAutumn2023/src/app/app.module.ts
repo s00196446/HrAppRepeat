@@ -1,7 +1,9 @@
+// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,12 +12,14 @@ import { EmployeeCreateComponent } from './employee-create/employee-create.compo
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { environment } from 'src/environments/environment';
-import { RegistrationComponent } from './registration/registration.component';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { provideConfig } from '../social-auth-config.service';
+import { SigninComponent } from './signin/signin.component';
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from './auth.interceptor';
+
+// Token getter function
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -25,21 +29,27 @@ import { provideConfig } from '../social-auth-config.service';
     HomepageComponent,
     NavbarComponent,
     ProfileComponent,
-    RegistrationComponent
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    SocialLoginModule
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'], // Adjust to your API domain
+        disallowedRoutes: ['localhost:5000/api/auth/login'] // Adjust accordingly
+      }
+    })
   ],
   providers: [
+    AuthService,
     {
-      provide: 'SocialAuthServiceConfig',
-      useFactory: provideConfig
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

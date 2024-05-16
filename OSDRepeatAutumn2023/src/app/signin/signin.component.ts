@@ -1,24 +1,25 @@
+// signin.component.ts
 import { Component } from '@angular/core';
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
-
+import { AuthService } from '../auth.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  templateUrl: './signin.component.html'
 })
 export class SigninComponent {
-  constructor(private authService: SocialAuthService) {}
+  username: string = '';
+  password: string = '';
 
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((user: SocialUser) => {
-        // Handle sign-in success
-        console.log('User successfully signed in:', user);
-      })
-      .catch((error) => {
-        // Handle sign-in error
-        console.error('Error signing in with Google:', error);
-      });
+  constructor(private authService: AuthService) { }
+
+  login() {
+    this.authService.login(this.username, this.password).subscribe(
+      response => {
+        console.log('Login successful', response);
+      },
+      error => {
+        console.error('Login failed', error);
+      }
+    );
   }
 }
