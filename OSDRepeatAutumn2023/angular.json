@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "OSDRepeatAutumn2023:build:production"
+              "browserTarget": "OSDRepeatAutumn2023:build:production"
             },
             "development": {
-              "buildTarget": "OSDRepeatAutumn2023:build:development"
+              "browserTarget": "OSDRepeatAutumn2023:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "OSDRepeatAutumn2023:build"
+            "browserTarget": "OSDRepeatAutumn2023:build"
           }
         },
         "test": {
