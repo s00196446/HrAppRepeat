@@ -1,25 +1,23 @@
 // signin.component.ts
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service'; // Adjust the path as necessary
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html'
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  login() {
-    this.authService.login(this.username, this.password).subscribe(
-      response => {
-        console.log('Login successful', response);
-      },
-      error => {
-        console.error('Login failed', error);
-      }
+  signIn(): void {
+    this.authService.signIn(this.username, this.password).subscribe(
+      () => this.router.navigate(['/']),
+      err => console.error('Login failed', err)
     );
   }
 }

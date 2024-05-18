@@ -1,0 +1,26 @@
+/* src/app/register/register.component.css */
+.container {
+    margin-top: 50px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    border-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .card-title {
+    margin: 0;
+  }
+  
+  .btn {
+    margin-top: 20px;
+  }
+  

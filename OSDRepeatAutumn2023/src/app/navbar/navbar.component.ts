@@ -1,9 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent{
+export class NavbarComponent {
+  constructor(public authService: AuthService, private router: Router) { }
+
+  get isAdmin(): boolean {
+    return this.authService.getUserRole() === 'admin';
+  }
+
+  signOut() :void {
+    this.authService.signOut();
+    this.router.navigate(['/signin']);
+  }
 }

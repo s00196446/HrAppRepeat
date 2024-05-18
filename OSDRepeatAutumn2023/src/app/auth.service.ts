@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
 
-  login(username: string, password: string): Observable<any> {
+  register(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, { username, password });
+  }
+
+  signIn(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, { username, password }).pipe(
       tap((response: any) => {
         localStorage.setItem('access_token', response.access_token);
@@ -22,13 +27,25 @@ export class AuthService {
     );
   }
 
-  logout() {
+  signOut(): void {
     localStorage.removeItem('access_token');
-    this.router.navigate(['/login']); // Redirect after logout
+  }
+
+  getToken() {
+    return localStorage.getItem('access_token');
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('access_token');
-    return token ? !this.jwtHelper.isTokenExpired(token) : false;
+    return !!this.getToken();
   }
+
+  getUserRole() {
+    const token = this.getToken();
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      return decoded.role;
+    }
+    return null;
+  }
+
 }

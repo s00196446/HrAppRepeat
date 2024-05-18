@@ -5,13 +5,15 @@ import { EmployeeCreateComponent } from './employee-create/employee-create.compo
 import { HomepageComponent } from './homepage/homepage.component';
 import { SigninComponent } from './signin/signin.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent }, // Default route
   { path: 'employees', component: EmployeeListComponent },
   { path: 'create', component: EmployeeCreateComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

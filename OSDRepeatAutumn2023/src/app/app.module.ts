@@ -1,10 +1,9 @@
-// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';  // Import FormsModule
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,10 +13,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './signin/signin.component';
+import { RegisterComponent } from './register/register.component';  // Ensure RegisterComponent is imported
 import { AuthService } from './auth.service';
 import { AuthInterceptor } from './auth.interceptor';
 
-// Token getter function
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -30,7 +29,8 @@ export function tokenGetter() {
     HomepageComponent,
     NavbarComponent,
     ProfileComponent,
-    SigninComponent
+    SigninComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -57,3 +57,4 @@ export function tokenGetter() {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
