@@ -11,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:5000/api/auth'; // Adjust to your API URL
+  private baseUrl = 'http://localhost:5000/api/auth';
 
   constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
 

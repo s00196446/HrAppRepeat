@@ -1,26 +1,51 @@
-/* src/app/register/register.component.css */
+/* src/styles.css */
+
+body {
+  background-color: #f1f3f6;
+}
+
 .container {
-    margin-top: 50px;
-  }
-  
-  .card {
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-header {
-    background-color: #007bff;
-    color: white;
-    border-bottom: 0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  .card-title {
-    margin: 0;
-  }
-  
-  .btn {
-    margin-top: 20px;
-  }
-  
+  max-width: 600px;
+}
+
+.card {
+  border-radius: 4px;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+h3 {
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+}
+
+.mt-5 {
+  margin-top: 5rem;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
