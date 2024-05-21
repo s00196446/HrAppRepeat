@@ -51,14 +51,12 @@ export class EmployeeListComponent implements OnInit {
     );
   }
   
-  
-
   deleteEmployee(employeeId: string): void {
     if (confirm('Are you sure you want to delete this employee?')) {
       this.employeeService.deleteEmployee(employeeId).subscribe(
         () => {
           this.toastr.success('Employee deleted successfully');
-          this.loadEmployees(); // Reload employees after deletion
+          this.loadEmployees();
         },
         (error) => {
           console.error('Error deleting employee', error);
@@ -76,7 +74,7 @@ export class EmployeeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadEmployees(); // Reload employees after edit
+        this.loadEmployees();
       }
     });
   }

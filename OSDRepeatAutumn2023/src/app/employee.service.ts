@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,18 +11,25 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   createEmployee(employeeData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, employeeData);
+    return this.http.post<any>(this.apiUrl, employeeData, { headers: this.getHeaders() });
   }
 
-  editEmployee(employeeId: string, employeeData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${employeeId}`, employeeData);
+  editEmployee(id: string, employeeData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, employeeData, { headers: this.getHeaders() });
   }
 
-  deleteEmployee(employeeId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${employeeId}`);
+  deleteEmployee(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    });
   }
 }

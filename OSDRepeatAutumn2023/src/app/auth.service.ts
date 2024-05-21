@@ -1,10 +1,10 @@
+// src/app/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AuthService {
   private baseUrl = 'http://localhost:5000/api/auth';
   private authStateSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isAuthenticated());
   private userRoleSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getUserRoleSync());
- 
+
   constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private toastr: ToastrService) { }
 
   register(username: string, password: string): Observable<any> {
@@ -58,17 +58,24 @@ export class AuthService {
   getUserRoleSync(): string | null {
     const token = this.getToken();
     if (token) {
-      const decoded: any = jwtDecode(token);
-      return decoded.role;
+      const decoded: any = this.jwtHelper.decodeToken(token);
+      return decoded['role'];
     }
     return null;
   }
 
   getProfile(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/profile`);
+    return this.http.get(`${this.baseUrl}/profile`, { headers: this.getHeaders() });
   }
 
   updateProfile(profile: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/profile`, profile);
+    return this.http.put(`${this.baseUrl}/profile`, profile, { headers: this.getHeaders() });
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    });
   }
 }
