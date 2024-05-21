@@ -7,14 +7,23 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  isAuthenticated: boolean = false;
+  isAdmin: boolean = false;
+
   constructor(public authService: AuthService, private router: Router) { }
 
-  get isAdmin(): boolean {
-    return this.authService.getUserRole() === 'admin';
+  ngOnInit(): void {
+    this.authService.getAuthState().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
+
+    this.authService.getUserRole().subscribe(role => {
+      this.isAdmin = role === 'admin';
+    });
   }
 
-  signOut() :void {
+  signOut(): void {
     this.authService.signOut();
     this.router.navigate(['/signin']);
   }

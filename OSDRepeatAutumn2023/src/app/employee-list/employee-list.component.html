@@ -1,16 +1,29 @@
-<h1 class="text-center mt-4">Employee List</h1>
-<div class="container">
+<div class="container mt-4">
+  <h2>Employee List</h2>
   <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let employee of employees">
-      <div class="card">
+    <div class="col-md-4" *ngFor="let employee of employees">
+      <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">{{ employee.firstName }} {{ employee.lastName }}</h5>
           <p class="card-text">Email: {{ employee.email }}</p>
           <p class="card-text">Hours: {{ employee.hours }}</p>
+          <button class="btn btn-primary" (click)="openEditModal(employee)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteEmployee(employee._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h2>Random Users</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let user of randomUsers">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.name.first }} {{ user.name.last }}</h5>
+          <p class="card-text">Email: {{ user.email }}</p>
+          <p class="card-text">Location: {{ user.location.city }}, {{ user.location.country }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

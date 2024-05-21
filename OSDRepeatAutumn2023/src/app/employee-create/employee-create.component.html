@@ -1,24 +1,22 @@
-<h1 class="text-center mt-4">Create Employee</h1>
 <div class="container">
-  <form (submit)="createEmployee()" class="needs-validation">
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name:</label>
-      <input type="text" id="firstName" [(ngModel)]="employeeData.firstName" name="firstName" class="form-control" required>
+  <h2>Create Employee</h2>
+  <form (ngSubmit)="createEmployee()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" class="form-control" [(ngModel)]="employee.firstName" name="firstName" required>
     </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name:</label>
-      <input type="text" id="lastName" [(ngModel)]="employeeData.lastName" name="lastName" class="form-control" required>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" class="form-control" [(ngModel)]="employee.lastName" name="lastName" required>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email:</label>
-      <input type="email" id="email" [(ngModel)]="employeeData.email" name="email" class="form-control" required>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="employee.email" name="email" required>
     </div>
-    <div class="mb-3">
-      <label for="hours" class="form-label">Hours:</label>
-      <input type="number" id="hours" [(ngModel)]="employeeData.hours" name="hours" class="form-control" required>
+    <div class="form-group">
+      <label for="hours">Hours</label>
+      <input type="number" id="hours" class="form-control" [(ngModel)]="employee.hours" name="hours" required>
     </div>
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary">Create</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Create Employee</button>
   </form>
 </div>

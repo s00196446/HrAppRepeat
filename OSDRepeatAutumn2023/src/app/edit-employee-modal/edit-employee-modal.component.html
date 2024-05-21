@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Edit Employee</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput [(ngModel)]="employee.firstName" name="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput [(ngModel)]="employee.lastName" name="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="employee.email" name="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Hours</mat-label>
+      <input matInput type="number" [(ngModel)]="employee.hours" name="hours">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save()">Save</button>
+</div>

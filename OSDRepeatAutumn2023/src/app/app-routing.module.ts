@@ -6,13 +6,15 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { SigninComponent } from './signin/signin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent }, // Default route
   { path: 'employees', component: EmployeeListComponent },
-  { path: 'create', component: EmployeeCreateComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'create', component: EmployeeCreateComponent, canActivate: [AuthGuard], data: {role: 'admin'} },
   { path: 'signin', component: SigninComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'register', component: RegisterComponent}
 ];
 

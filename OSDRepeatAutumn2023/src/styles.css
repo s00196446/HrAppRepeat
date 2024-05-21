@@ -1,4 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/ngx-toastr/toastr.css";
+
+.navbar-brand img {
+  margin-right: 10px;
+}
 
 /* Navbar background color on hover */
 .navbar-dark .navbar-nav .nav-item:hover {
@@ -9,3 +14,22 @@
   .navbar-dark .navbar-nav .nav-link:hover {
     color: #f8f9fa;
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  margin-top: 20px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

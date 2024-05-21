@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  // Import FormsModule
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +25,7 @@ import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';  // Ensure RegisterComponent is imported
 import { AuthService } from './auth.service';
 import { AuthInterceptor } from './auth.interceptor';
+import { EditEmployeeModalComponent } from './edit-employee-modal/edit-employee-modal.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -30,7 +40,8 @@ export function tokenGetter() {
     NavbarComponent,
     ProfileComponent,
     SigninComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditEmployeeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +49,19 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule,
     RouterModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCardModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

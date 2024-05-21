@@ -1,4 +1,3 @@
-// signin.component.ts
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -17,7 +16,7 @@ export class SigninComponent {
   signIn(): void {
     this.authService.signIn(this.username, this.password).subscribe(
       () => this.router.navigate(['/']),
-      err => console.error('Login failed', err)
+      error => console.error('Login failed', error)
     );
   }
 }
