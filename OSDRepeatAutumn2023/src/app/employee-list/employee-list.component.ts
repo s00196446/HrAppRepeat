@@ -4,6 +4,7 @@ import { ExternalApiService } from '../external-api-service';
 import { ToastrService } from 'ngx-toastr';
 import { EditEmployeeModalComponent } from '../edit-employee-modal/edit-employee-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -14,17 +15,20 @@ export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
   randomUsers: any[] = [];
   selectedEmployee: any = {};
+  isAdmin: boolean = false;
 
   constructor(
     private employeeService: EmployeeService,
     private externalApiService: ExternalApiService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.loadEmployees();
-    this.loadRandomUsers();
+    this.loadRandomUsers()
+    this.isAdmin = this.authService.getUserRoleSync() === 'admin';
   }
 
   loadEmployees(): void {
@@ -67,6 +71,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openEditModal(employee: any): void {
+    this.selectedEmployee = { ...employee};
     const dialogRef = this.dialog.open(EditEmployeeModalComponent, {
       width: '400px',
       data: { employee }
@@ -76,20 +81,7 @@ export class EmployeeListComponent implements OnInit {
       if (result) {
         this.loadEmployees();
       }
-    });
-  }
+    })
 
-  editEmployee(): void {
-    this.employeeService.editEmployee(this.selectedEmployee._id, this.selectedEmployee).subscribe(
-      () => {
-        this.toastr.success('Employee updated successfully');
-        // Implement modal closing logic with Angular Material dialog
-        this.loadEmployees(); // Reload employees after edit
-      },
-      (error) => {
-        console.error('Error updating employee', error);
-        this.toastr.error('Failed to update employee');
-      }
-    );
   }
 }

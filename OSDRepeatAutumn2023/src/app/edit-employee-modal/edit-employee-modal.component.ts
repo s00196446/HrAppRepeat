@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EmployeeService } from '../employee.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-employee-modal.component.css']
 })
 export class EditEmployeeModalComponent {
-  employee: any;
+  @Input() employee: any;
 
   constructor(
     public dialogRef: MatDialogRef<EditEmployeeModalComponent>,

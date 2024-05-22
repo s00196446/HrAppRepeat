@@ -10,7 +10,7 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent }, // Default route
-  { path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard], data: {role: 'admin'}},
+  { path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'create', component: EmployeeCreateComponent, canActivate: [AuthGuard], data: {role: 'admin'} },
   { path: 'signin', component: SigninComponent },
